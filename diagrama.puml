@@ -1,0 +1,99 @@
+@startuml
+interface IMovible {
+  +mover()
+}
+interface IDisparable {
+  +disparar()
+}
+interface IColisionable {
+  +detectarColision()
+}
+interface IDestructible {
+  +destruir()
+}
+
+class JuegoSpaceInvaders
+class Escenario
+class Nivel
+class Jugador
+class Enemigo
+class Nave
+class Formacion
+class Barrera
+class Disparo
+class Vida
+class Movimiento
+class Colision
+class Tiempo
+class Puntaje
+class Control
+class Oleada
+class MemoriaJuego
+class DisparoJugador
+class DisparoEnemigo
+class PowerUp
+class PowerUpVida
+class PowerUpEscudo
+class PowerUpVelocidad
+class PowerUpDisparo
+class Explosion
+class EstadoJuego
+class HistorialPartida
+
+JuegoSpaceInvaders *-- Escenario
+JuegoSpaceInvaders *-- "*" Nivel
+JuegoSpaceInvaders *-- MemoriaJuego
+JuegoSpaceInvaders *-- EstadoJuego
+
+Escenario *-- Jugador
+Escenario *-- Formacion
+Escenario *-- "4" Barrera
+Escenario *-- Oleada
+
+Jugador --|> Nave
+Enemigo --|> Nave
+
+Formacion *-- "*" Enemigo
+Oleada *-- "*" Enemigo
+
+Nave o-- "*" Disparo
+Nave o-- Vida
+Nave o-- Movimiento
+
+Disparo --|> DisparoJugador
+Disparo --|> DisparoEnemigo
+Disparo *-- Explosion
+
+Colision o-- Disparo
+Colision o-- Nave
+Colision o-- Barrera
+
+Jugador *-- Puntaje
+Jugador o-- Control
+Jugador *-- PowerUp
+
+PowerUp --|> PowerUpVida
+PowerUp --|> PowerUpEscudo
+PowerUp --|> PowerUpVelocidad
+PowerUp --|> PowerUpDisparo
+
+Movimiento o-- Tiempo
+
+Nivel *-- Formacion
+Nivel *-- Barrera
+Nivel *-- Oleada
+
+MemoriaJuego *-- Puntaje
+MemoriaJuego *-- Nivel
+MemoriaJuego *-- Vida
+MemoriaJuego *-- HistorialPartida
+
+Nave ..|> IMovible
+Nave ..|> IDisparable
+Disparo ..|> IMovible
+Barrera ..|> IColisionable
+Enemigo ..|> IColisionable
+Jugador ..|> IColisionable
+Barrera ..|> IDestructible
+Enemigo ..|> IDestructible
+@enduml
