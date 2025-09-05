@@ -1,13 +1,17 @@
 @startuml
+
 interface IMovible {
   +mover()
 }
+
 interface IDisparable {
   +disparar()
 }
+
 interface IColisionable {
   +detectarColision()
 }
+
 interface IDestructible {
   +destruir()
 }
@@ -39,16 +43,27 @@ class PowerUpDisparo
 class Explosion
 class EstadoJuego
 class HistorialPartida
+class Sonido
+class Musica
+class Imagen
+class Texto
+class Menu
+class Configuracion
 
 JuegoSpaceInvaders *-- Escenario
 JuegoSpaceInvaders *-- "*" Nivel
 JuegoSpaceInvaders *-- MemoriaJuego
 JuegoSpaceInvaders *-- EstadoJuego
+JuegoSpaceInvaders *-- Menu
+JuegoSpaceInvaders *-- Configuracion
 
 Escenario *-- Jugador
 Escenario *-- Formacion
 Escenario *-- "4" Barrera
 Escenario *-- Oleada
+Escenario *-- Sonido
+Escenario *-- Imagen
+Escenario *-- Texto
 
 Jugador --|> Nave
 Enemigo --|> Nave
@@ -88,6 +103,8 @@ MemoriaJuego *-- Nivel
 MemoriaJuego *-- Vida
 MemoriaJuego *-- HistorialPartida
 
+Musica *-- Sonido
+
 Nave ..|> IMovible
 Nave ..|> IDisparable
 Disparo ..|> IMovible
@@ -96,4 +113,5 @@ Enemigo ..|> IColisionable
 Jugador ..|> IColisionable
 Barrera ..|> IDestructible
 Enemigo ..|> IDestructible
+
 @enduml
