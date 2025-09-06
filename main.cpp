@@ -8,4 +8,5 @@ int main(int argc, char const *argv[])
     foquito.encender();
     foquito.apagar();
     return 0;
+    
 }
